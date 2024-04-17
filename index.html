@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Baby Love You</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden
+    }
+
+    body {
+      background-image: url(MyCrush.jpg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .text {
+      font-size: 30px;
+      font-weight: bold;
+      padding-bottom: 10px;
+      text-align: center;
+      color: red;
+      animation: grow 5s infinite, appear 5s infinite;
+    }
+
+    @keyframes grow {
+      0% {
+        transform: scale(0.4);
+      }
+
+      50% {
+        transform: scale(0.8);
+      }
+
+      100% {
+        transform: scale(0.6);
+      }
+    }
+
+    @keyframes appear {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 0.8;
+      }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 15px;
+      color: white;
+      animation: float 10s linear infinite;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="text text1">My baby love you so much forever you and I</div>
+  <div> </div>
+  <div class="text text2">I love you oh! I love you so much forever you and I</div>
+  <audio style="display: none;" autoplay loop>
+    <source src="./PleaseTellMeWhy.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Generate and add hearts to the page
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '❤️'; // Unicode heart symbol
+      heart.style.left = `${Math.random() * 90}vw`;
+      heart.style.top = `${Math.random() * 90}vh`;
+      document.body.appendChild(heart);
+
+      // Remove the heart after 5 seconds
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    // Create a new heart every 300 milliseconds
+    setInterval(createHeart, 300);
+
+    // Animate the text
+    const textElements = document.querySelectorAll('.text');
+    textElements.forEach((textElement, index) => {
+      const text = textElement.textContent;
+      textElement.textContent = '';
+
+      let i = 0;
+      function animateText() {
+        if (i < text.length) {
+          textElement.textContent += text[i];
+          i++;
+          setTimeout(animateText, 100);
+        }
+      }
+      animateText();
+    });
+
+    const element = document.querySelector('audio');
+    document.body.addEventListener("mousemove", function () {
+      element.play();
+    })
+  </script>
+</body>
+
+</html>
